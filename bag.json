@@ -1,0 +1,33 @@
+{
+  "user": {
+    "name": "Julio",
+    "lastName": "Disla",
+    "city": "Valverde",
+    "muni": "Mao",
+    "tienda": "Daba",
+    "cedula": "40223920386"
+  },
+"ordenes": [
+  {
+    "type": "bag",
+    "size": "15x20cm",
+    "cant": "500",
+    "logo": "7.jpeg",
+    "info": "hola",
+    "color": "3 colors",
+    "tienda": "Daba",
+    "money": 5000
+  },
+  {
+    "type": "bag",
+    "size": "15x20cm",
+    "cant": "400",
+    "logo": "22.jpeg",
+    "info": "hola",
+    "color": "3 colors",
+    "tienda": "Daba",
+    "money": 5000
+
+  }
+]
+}
