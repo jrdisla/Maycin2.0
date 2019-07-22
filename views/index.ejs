@@ -125,8 +125,38 @@
               <h3><a href="#">Shopping Bags</a></h3>
               <p class="mb-4">Diseñamos todo tipo de bolsas de compras.</p>
               <div>
-                <a href="/shop/shopping" class="btn btn-black mr-1 rounded-0">Cart</a>
+<!--                <a href="/shop/shopping" class="btn btn-black mr-1 rounded-0">Cart</a>-->
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
+                  Cart
+                </button>
+
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                  <label for="validationCustom01">Cedula</label>
+                  <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom01" placeholder="XXXXXXXXXXX" required>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value)" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -417,6 +447,26 @@
 <script src="js/jquery.fancybox.min.js"></script>
 <script src="js/jquery.sticky.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+  function onlyNumbers(input) {
+    var numbers = /^[0-9]+$/;
+    console.log(input)
+    if(input.match(numbers)){
+      if(input.length <11)
+      {
+        alert('Numero de Cedula Invalido.');
+      }else {
+        return true;
+      }
+    }
+    else
+    {
+      alert('Solo valores numericos.');
+    }
+  }
+
+</script>
 
 </body>
 </html>
