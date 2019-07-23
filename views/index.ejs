@@ -152,11 +152,10 @@
 
                   <label for="validationCustom01">Cedula</label>
                   <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom01" placeholder="XXXXXXXXXXX" required>
-
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value)" class="btn btn-primary">Save changes</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value)" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -457,6 +456,7 @@
       {
         alert('Numero de Cedula Invalido.');
       }else {
+        window.location.href="/shop/shopping"
         return true;
       }
     }
