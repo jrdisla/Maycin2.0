@@ -32,7 +32,8 @@ router.get('/:id', function(req, res, next) {
       var dbo = db.db("Maycin");
      // insertCart(dbo,cart);
      // addTocart(dbo,toAdd);
-
+      findClient(dbo,id,db);
+      console.log('El cliente es:')
    });
 
    res.render('shop');
@@ -40,7 +41,7 @@ router.get('/:id', function(req, res, next) {
 let insertCart = function(dbo,cart){
    dbo.collection('Carts').insertOne(cart,function (err,result) {
       if (err) throw err;
-      console.log(result);
+      console.log("El resultado es:"+result);
      // db.close();
    })
 };
@@ -52,12 +53,16 @@ let addTocart = function(dbo,toAdd){
        );
 };
 
-let findClient = function (dbo,cedula)
+let findClient = function (dbo,cedula,db)
 {
- var object =   dbo.collection('Carts').findOne(
+   dbo.collection('Carts').find(
        {cedula:cedula}
-   );
-   return object;
+   ).toArray(function (err,result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+ });
+
 };
 
 
