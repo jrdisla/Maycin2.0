@@ -16,12 +16,14 @@ router.get('/:id', function(req, res, next) {
 
    var cart = new Cart(id,[{
       name: 'Nuevo',
-      size: '24'
+      size: '24',
+      cd: id
    }]);
 
    var toAdd = {
       name: 'function',
-      size: '25'
+      size: '25',
+      cd: id
    };
 
    var url = "mongodb://localhost:27017/";
@@ -30,10 +32,10 @@ router.get('/:id', function(req, res, next) {
 
       console.log(cart);
       var dbo = db.db("Maycin");
-     // insertCart(dbo,cart);
-     // addTocart(dbo,toAdd);
-      findClient(dbo,id,db);
-      console.log('El cliente es:')
+      //insertCart(dbo,cart);
+     // addTocart(dbo,toAdd,id);
+        findClient(dbo,id,db);
+    //  console.log('El cliente es:')
    });
 
    res.render('shop');
@@ -45,24 +47,27 @@ let insertCart = function(dbo,cart){
      // db.close();
    })
 };
-let addTocart = function(dbo,toAdd){
+let addTocart = function(dbo,toAdd,id){
    dbo.collection('Carts')
        .updateOne(
-           {cedula:'12345678909'},
+           {cedula:id},
            {$push: {prods:toAdd}}
        );
 };
 
 let findClient = function (dbo,cedula,db)
 {
-   dbo.collection('Carts').find(
-       {cedula:cedula}
-   ).toArray(function (err,result) {
-    if (err) throw err;
-    console.log(result);
-    db.close();
- });
-
+   // const c = dbo.collection('Carts').find(
+   //     {cedula:cedula,
+   //     'prods.cd': cedula
+   //     }
+   // );
+ var query = {'prods.cd': {$elemMatch: {'cd':'12345678909'}}};
+      var p = dbo.collection('Carts').find(query).toArray(function (err,result) {
+       //console.log(result);
+       return result;
+       });
+console.log("aqio "+p);
 };
 
 
