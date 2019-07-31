@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb').MongoClient;
 router.use(express.static('public'));
-
+var outData ='';
 // var insertCart = function(db,cart){
 //   db.conllection('Carts').insertOne({
 //      cedula : cart.id,
@@ -34,7 +34,15 @@ router.get('/:id', function(req, res, next) {
       var dbo = db.db("Maycin");
       //insertCart(dbo,cart);
      // addTocart(dbo,toAdd,id);
-        findClient(dbo,id,db);
+
+  //    findClient(dbo,'12345678909',db);
+      let daw = findClient(dbo,'12345678909',db);
+      console.log("a");
+      console.log("hola"+daw)
+      // for(let i=0;i<arr.length;i++)
+      // {
+      //    console.log(arr[i].size);
+      // }S
     //  console.log('El cliente es:')
    });
 
@@ -57,23 +65,17 @@ let addTocart = function(dbo,toAdd,id){
 
 let findClient = function (dbo,cedula,db)
 {
-   // const c = dbo.collection('Carts').find(
-   //     {cedula:cedula,
-   //     'prods.cd': cedula
-   //     }
-   // );
-   const cursor = dbo.collection('Carts').find({
-      "prods.cd":'55545678907'
-   }).toArray(function (err,result) {
-    //  console.log(result)
-      result.forEach(function (data) {
-         data.prods.forEach(function (pol) {
-            console.log(pol.name)
-         });
-      //   console.log(sh)
-      })
-   });
-//console.log("aqio "+JSON.stringify(cursor));
+  dbo.collection('Carts').find({
+     "prods.cd": cedula
+  }).toArray(function (err, result) {
+     result.forEach(function (data) {
+        let out = data.prods;
+        console.log('out: '+out);
+        db.close();
+        return out;
+
+     })
+  });
 };
 
 
