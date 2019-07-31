@@ -62,12 +62,18 @@ let findClient = function (dbo,cedula,db)
    //     'prods.cd': cedula
    //     }
    // );
- var query = {'prods.cd': {$elemMatch: {'cd':'12345678909'}}};
-      var p = dbo.collection('Carts').find(query).toArray(function (err,result) {
-       //console.log(result);
-       return result;
-       });
-console.log("aqio "+p);
+   const cursor = dbo.collection('Carts').find({
+      "prods.cd":'55545678907'
+   }).toArray(function (err,result) {
+    //  console.log(result)
+      result.forEach(function (data) {
+         data.prods.forEach(function (pol) {
+            console.log(pol.name)
+         });
+      //   console.log(sh)
+      })
+   });
+//console.log("aqio "+JSON.stringify(cursor));
 };
 
 
