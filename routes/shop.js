@@ -10,48 +10,73 @@ var outData ='';
 //      productos: cart.prods
 //   });
 // };
+var url = "mongodb://localhost:27017/";
 
 router.get('/:id', function(req, res, next) {
    var id = req.params.id;
 
-   var cart = new Cart(id,[{
-      name: 'Nuevo',
-      size: '24',
-      cd: id
-   }]);
+  //  var cart = new Cart(id,[{
+  //     name: 'Nuevo',
+  //     size: '24',
+  //     cd: id
+  //  }]);
+  //
+  //  var toAdd = {
+  //     name: 'function',
+  //     size: '25',
+  //     cd: id
+  //  };
+  //
+  //  var url = "mongodb://localhost:27017/";
+  //  mongodb.connect(url,function (err,db) {
+  //     if(err) throw err;
+  //
+  //     console.log(cart);
+  //     var dbo = db.db("Maycin");
+  //
+  //     insertCart(dbo,cart,db);
+  //    // addTocart(dbo,toAdd,id);
+  //
+  // //    findClient(dbo,'12345678909',db);
+  // //     let daw = findClient(dbo,'12345678909',db);
+  // //     console.log("a");
+  // //     console.log("hola"+daw)
+  //
+  //     // for(let i=0;i<arr.length;i++)
+  //     // {
+  //     //    console.log(arr[i].size);
+  //     // }S
+  //   //  console.log('El cliente es:')
+  //  });
 
-   var toAdd = {
-      name: 'function',
-      size: '25',
-      cd: id
-   };
+   res.render("shop");
 
-   var url = "mongodb://localhost:27017/";
-   mongodb.connect(url,function (err,db) {
-      if(err) throw err;
-
-      console.log(cart);
-      var dbo = db.db("Maycin");
-      //insertCart(dbo,cart);
-     // addTocart(dbo,toAdd,id);
-
-  //    findClient(dbo,'12345678909',db);
-      let daw = findClient(dbo,'12345678909',db);
-      console.log("a");
-      console.log("hola"+daw)
-      // for(let i=0;i<arr.length;i++)
-      // {
-      //    console.log(arr[i].size);
-      // }S
-    //  console.log('El cliente es:')
-   });
-
-   res.render('shop');
 });
-let insertCart = function(dbo,cart){
+router.get("cart/:id",function (req,res,next) {
+   dbo.collection('Carts').find({
+      "prods.cd": '12345678909'
+   }).toArray(function (err, result) {
+      result.forEach(function (data) {
+         let out = data.prods;
+         out.forEach(function (tr) {
+            console.log(tr.name);
+            console.log(tr.cd);
+         });
+         console.log('out: '+out);
+
+         db.close();
+         res.render('shopcart',{
+            car:out
+         });
+
+      })
+   });
+});
+let insertCart = function(dbo,cart,db){
    dbo.collection('Carts').insertOne(cart,function (err,result) {
       if (err) throw err;
       console.log("El resultado es:"+result);
+      db.close;
      // db.close();
    })
 };
@@ -93,14 +118,34 @@ router.post('/upload',(req,res) => {
    var cant = req.body.cant;
    var file = `./files/${req.files.file.name}`;
 
-   var fact = new Fact(first,last,city,muni,addr,tienda,'41','shop',size,cant,file,info,'2 colors',tienda,cant);
-   console.log(fact.user.cedula);
-   let EDFile = req.files.file
-   EDFile.mv(`./files/${EDFile.name}`,err => {
-      if(err) return res.status(500).send({ message : err })
+   var prod = [{
+         type: 'shopping',
+         name: first,
+         lastName: last,
+         tienda: tienda,
+         inf: info,
+         colors: radio,
+         size: size,
+         cant: cant,
+         logo: file
+   }];
 
-      return res.status(200).send({ message : 'File upload' })
-   })
+   mongodb.connect(url,function (err,db) {
+      if(err) throw err;
+      var dbo = db.db("Maycin");
+      insertCart(dbo,prod,db);
+   });
+
+   insertCart(dbo,prod,db);
+   // var fact = new Fact(first,last,city,muni,addr,tienda,'41','shop',size,cant,file,info,'2 colors',tienda,cant);
+   // console.log(fact.user.cedula);
+   // let EDFile = req.files.file
+   // EDFile.mv(`./files/${EDFile.name}`,err => {
+   //    if(err) return res.status(500).send({ message : err })
+   //
+   //    return res.status(200).send({ message : 'File upload' })
+   // })
+
 
 });
 module.exports = router;
