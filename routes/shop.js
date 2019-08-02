@@ -118,25 +118,38 @@ router.post('/upload',(req,res) => {
    var cant = req.body.cant;
    var file = `./files/${req.files.file.name}`;
 
-   var prod = [{
+   let prod = {
          type: 'shopping',
-         name: first,
-         lastName: last,
+         cd: '12345678907',
          tienda: tienda,
          inf: info,
          colors: radio,
          size: size,
          cant: cant,
          logo: file
-   }];
+   };
 
+   var addr = new Cart('12345678907',prod);
    mongodb.connect(url,function (err,db) {
       if(err) throw err;
-      var dbo = db.db("Maycin");
-      insertCart(dbo,prod,db);
+      var dbo = db.db("Maycin")
+      dbo.collection("Carts").find({cedula : "12345678907"}).limit(1).count(function (err, res) {
+         if (err)
+            throw err;
+         if(res===0){
+            insertCart(dbo,addr,db);
+         }
+         else {
+            addTocart(dbo,prod,'12345678909');
+         }
+         db.close();
+      });
+    //  console.log("la cantidad es: "+ver);
+     // insertCart(dbo,addr,db);
+      res.render('index');
    });
 
-   insertCart(dbo,prod,db);
+ //  insertCart(dbo,prod,db);
    // var fact = new Fact(first,last,city,muni,addr,tienda,'41','shop',size,cant,file,info,'2 colors',tienda,cant);
    // console.log(fact.user.cedula);
    // let EDFile = req.files.file
