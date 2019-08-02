@@ -105,7 +105,6 @@ let findClient = function (dbo,cedula,db)
 
 
 router.post('/upload',(req,res) => {
-
    var first = req.body.first;
    var last = req.body.last;
    var tienda = req.body.tienda;
@@ -117,30 +116,39 @@ router.post('/upload',(req,res) => {
    var size = req.body.size;
    var cant = req.body.cant;
    var file = `./files/${req.files.file.name}`;
-
-   let prod = {
-         type: 'shopping',
-         cd: '12345678907',
-         tienda: tienda,
-         inf: info,
-         colors: radio,
-         size: size,
-         cant: cant,
-         logo: file
-   };
-
-   var addr = new Cart('12345678907',prod);
+   var cd_cliente = req.session.user;
    mongodb.connect(url,function (err,db) {
       if(err) throw err;
       var dbo = db.db("Maycin")
-      dbo.collection("Carts").find({cedula : "12345678907"}).limit(1).count(function (err, res) {
+      dbo.collection("Carts").find({cedula : cd_cliente}).limit(1).count(function (err, res) {
          if (err)
             throw err;
          if(res===0){
+             let prod = [{
+                 type: 'shopping',
+                 cd: cd_cliente,
+                 tienda: tienda,
+                 inf: info,
+                 colors: radio,
+                 size: size,
+                 cant: cant,
+                 logo: file
+             }];
+             var addr = new Cart(cd_cliente,prod);
             insertCart(dbo,addr,db);
          }
          else {
-            addTocart(dbo,prod,'12345678909');
+             let prod = {
+                 type: 'shopping',
+                 cd: cd_cliente,
+                 tienda: tienda,
+                 inf: info,
+                 colors: radio,
+                 size: size,
+                 cant: cant,
+                 logo: file
+             };
+            addTocart(dbo,prod,cd_cliente);
          }
          db.close();
       });
