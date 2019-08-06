@@ -128,18 +128,44 @@
 <!--                <a href="/shop/shopping" class="btn btn-black mr-1 rounded-0">Cart</a>-->
 
                 <!-- Button trigger modal -->
+
+                <%if(session === 0) {%>
                 <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
                   Cart
                 </button>
+                <%}
+                else {%>
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd%>)">
+                          Cart
+                </button>
+               <%}%>
+
+
 
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
           </div>
         </div>
+        <script>
+          function show(sesion) {
+            if(sesion === 1)
+            {
+              $("div.modal fade").show()
+              console.log("hola1");
+            }
+            else
+            {
+              // document.getElementById("modal fade").style.visibility = "visible";
+              $("div.modal fade").hide()
+              console.log("hola");
+            }
+          }
+        </script>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -160,6 +186,7 @@
             </div>
           </div>
         </div>
+        <!-- Modal -->
 
         <div class="col-lg-4 col-md-6 mb-5">
           <div class="product-item">
@@ -466,6 +493,11 @@
     }
   }
 
+</script>
+<script>
+  function onC(id) {
+    window.location.href="/session/"+id;
+  }
 </script>
 
 </body>
