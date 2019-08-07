@@ -12,13 +12,13 @@ var outData ='';
 // };
 var url = "mongodb://localhost:27017/";
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id/:type', function(req, res, next) {
    // var id = req.params.id;
    //
    // var item_shop = {
-   //     type: 'Shopping',
-   //     size: [3,4,5,6,7,8],
-   //     cantidad: [100,200,300,400,500,600,700,800,900,1000]
+   //     type: 'cup',
+   //     size: ['Pequeñas','Medianas','Grandes'],
+   //     cantidad: [5,10,25,50,100,200,300,400,500]
    //
    // };
     var data = {};
@@ -29,16 +29,16 @@ router.get('/:id', function(req, res, next) {
        //         throw err;
        //     console.log(result);
        // });
-       dbo.collection('items').findOne({type:"Shopping"},function (err,result) {
+       dbo.collection('items').findOne({type:req.params.type},function (err,result) {
            data = result;
            console.log(data.size);
            db.close();
            res.render("shop",{
                'data':result
            });
-       })
+       });
    });
-
+});
   //  var cart = new Cart(id,[{
   //     name: 'Nuevo',
   //     size: '24',
@@ -73,8 +73,6 @@ router.get('/:id', function(req, res, next) {
   //   //  console.log('El cliente es:')
   //  });
 
-
-});
 router.get("cart/:id",function (req,res,next) {
    dbo.collection('Carts').find({
       "prods.cd": '12345678909'
