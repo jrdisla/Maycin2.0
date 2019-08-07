@@ -13,7 +13,31 @@ var outData ='';
 var url = "mongodb://localhost:27017/";
 
 router.get('/:id', function(req, res, next) {
-   var id = req.params.id;
+   // var id = req.params.id;
+   //
+   // var item_shop = {
+   //     type: 'Shopping',
+   //     size: [3,4,5,6,7,8],
+   //     cantidad: [100,200,300,400,500,600,700,800,900,1000]
+   //
+   // };
+    var data = {};
+   mongodb.connect(url,function (err,db) {
+       var dbo = db.db("Maycin");
+       // dbo.collection('items').insertOne(item_shop,function (err,result) {
+       //     if (err)
+       //         throw err;
+       //     console.log(result);
+       // });
+       dbo.collection('items').findOne({type:"Shopping"},function (err,result) {
+           data = result;
+           console.log(data.size);
+           db.close();
+           res.render("shop",{
+               'data':result
+           });
+       })
+   });
 
   //  var cart = new Cart(id,[{
   //     name: 'Nuevo',
@@ -49,7 +73,6 @@ router.get('/:id', function(req, res, next) {
   //   //  console.log('El cliente es:')
   //  });
 
-   res.render("shop");
 
 });
 router.get("cart/:id",function (req,res,next) {
@@ -80,12 +103,13 @@ let insertCart = function(dbo,cart,db){
      // db.close();
    })
 };
-let addTocart = function(dbo,toAdd,id){
+let addTocart = function(dbo,toAdd,id,db){
    dbo.collection('Carts')
        .updateOne(
            {cedula:id},
            {$push: {prods:toAdd}}
        );
+   db.close();
 };
 
 let findClient = function (dbo,cedula,db)
@@ -105,12 +129,12 @@ let findClient = function (dbo,cedula,db)
 
 
 router.post('/upload',(req,res) => {
-   var first = req.body.first;
-   var last = req.body.last;
+   // var first = req.body.first;
+   // var last = req.body.last;
    var tienda = req.body.tienda;
-   var city = req.body.city;
-   var muni = req.body.muni;
-   var addr = req.body.addr;
+   // var city = req.body.city;
+   // var muni = req.body.muni;
+   // var addr = req.body.addr;
    var info = req.body.info;
    var radio = req.body.radio;
    var size = req.body.size;
@@ -148,7 +172,7 @@ router.post('/upload',(req,res) => {
                  cant: cant,
                  logo: file
              };
-            addTocart(dbo,prod,cd_cliente);
+            addTocart(dbo,prod,cd_cliente,db);
          }
          db.close();
       });
