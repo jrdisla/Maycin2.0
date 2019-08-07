@@ -128,6 +128,9 @@
 <!--                <a href="/shop/shopping" class="btn btn-black mr-1 rounded-0">Cart</a>-->
 
                 <!-- Button trigger modal -->
+              <script>
+                var type = "shopping";
+              </script>
 
                 <%if(session === 0) {%>
                 <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
@@ -135,7 +138,7 @@
                 </button>
                 <%}
                 else {%>
-                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,"shopping"%>)">
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,type%>)">
                           Añadir al Carrito
                 </button>
                <%}%>
@@ -164,7 +167,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value)" class="btn btn-primary">Save changes</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value,type)" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -467,7 +470,7 @@
 <script src="js/main.js"></script>
 
 <script>
-  function onlyNumbers(input) {
+  function onlyNumbers(input,type) {
     var numbers = /^[0-9]+$/;
     console.log(input)
     if(input.match(numbers)){
@@ -475,7 +478,7 @@
       {
         alert('Numero de Cedula Invalido.');
       }else {
-        window.location.href="/session/"+input;
+        window.location.href="/session/"+input+"/"+type;
         return true;
       }
     }
