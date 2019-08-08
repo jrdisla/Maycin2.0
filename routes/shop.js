@@ -12,8 +12,11 @@ var outData ='';
 // };
 var url = "mongodb://localhost:27017/";
 
-router.get('/:id/:type', function(req, res, next) {
-   // var id = req.params.id;
+router.get('/', function(req, res, next) {
+
+    var id = req.query.id;
+    var type = req.query.type;
+
    //
    // var item_shop = {
    //     type: 'cup',
@@ -29,9 +32,11 @@ router.get('/:id/:type', function(req, res, next) {
        //         throw err;
        //     console.log(result);
        // });
-       dbo.collection('items').findOne({type:req.params.type},function (err,result) {
+       dbo.collection('items').findOne({type:type},function (err,result) {
            data = result;
-           console.log(data.size);
+           if(err)
+               throw err;
+       //    console.log(data.size);
            db.close();
            res.render("shop",{
                'data':result

@@ -17,19 +17,22 @@ router.get('/', function(req, res, next) {
   );
 });
 
-router.get('/session/:id',function (req,res) {
+router.get('/session/',function (req,res) {
   console.log("llego");
+  var id = req.query.id;
+  var typ = req.query.type;
   if(req.session.user === undefined)
   {
       console.log("no hay user"+req.session.user);
-      req.session.user = req.params.id;
+      req.session.user = id;
       console.log("Setted user: "+req.session.user);
-      res.redirect("/shop/"+req.session.user);
+      res.redirect("/shop/?id="+id+"&type="+typ);
+      //res.redirect("/shop/"+req.session.user+"/"+typ);
   }
   else
   {
     console.log("hay user");
-    res.redirect("/shop/"+req.session.user);
+    //res.redirect("/shop/"+req.session.user+"/"+req.params.type);
   }
   // else
   // {

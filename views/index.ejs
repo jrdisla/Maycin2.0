@@ -129,7 +129,7 @@
 
                 <!-- Button trigger modal -->
               <script>
-                var type = "shopping";
+                var type_prod = 'Shopping';
               </script>
 
                 <%if(session === 0) {%>
@@ -138,7 +138,7 @@
                 </button>
                 <%}
                 else {%>
-                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,type%>)">
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,type_prod%>)">
                           Añadir al Carrito
                 </button>
                <%}%>
@@ -167,7 +167,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value,type)" class="btn btn-primary">Save changes</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value,type_prod)" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -183,6 +183,9 @@
               <h3><a href="#">Stickers </a></h3>
               <p class="mb-4">Diseña tus stickers con nosotros.</p>
               <div>
+                <script>
+                  type_prod = 'sticker';
+                </script>
                 <%if(session === 0) {%>
                   <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
                     Añadir al Carrito
@@ -478,8 +481,11 @@
       {
         alert('Numero de Cedula Invalido.');
       }else {
-        window.location.href="/session/"+input+"/"+type;
+        var url ="/session/?id="+input+"&type="+type;
+        window.location =url
+        console.log("Estoy aqui"+url);
         return true;
+
       }
     }
     else
