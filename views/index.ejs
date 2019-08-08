@@ -74,7 +74,21 @@
             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
               <li><a href="#home-section" class="nav-link">Home</a></li>
               <li><a href="#products-section" class="nav-link">Productos</a></li>
-              <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a></li><li><a href="#special-section" class="nav-link">Especiales</a></li>
+              <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a>
+              </li><li><a href="#special-section" class="nav-link">Especiales</a></li>
+              <%if(session == 1){%>
+              <script>
+                const plp = "<%=cd%>";
+              </script>
+              </li><a onclick="redCart(plp)" class="nav-link">Ver Carrito</a><li>
+              </li><a class="nav-link">Hola!! <%=cd%></a><li>
+                <%}
+                else {%>
+              </li>
+              <a  class="nav-link" data-toggle="modal" data-target="#exampleModalL">
+               Login
+              </a>
+              <%}%>
             </ul>
           </nav>
         </div>
@@ -128,29 +142,26 @@
 <!--                <a href="/shop/shopping" class="btn btn-black mr-1 rounded-0">Cart</a>-->
 
                 <!-- Button trigger modal -->
-              <script>
-                var type_prod = 'Shopping';
-              </script>
-
                 <%if(session === 0) {%>
                 <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
                   Añadir al Carrito
                 </button>
                 <%}
                 else {%>
-                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,type_prod%>)">
+
+                <script>
+                  var x = "<%=cd%>";
+                </script>
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Shopping')">
                           Añadir al Carrito
                 </button>
                <%}%>
-
-
-
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
           </div>
         </div>
-        <!-- Modal -->
+        <!-- Modal shopping -->
         <div class="modal fade"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -167,7 +178,146 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value,type_prod)" class="btn btn-primary">Save changes</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom01').value,'Shopping')" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <!-- Modal Logic-->
+        <div class="modal fade"  id="exampleModalL" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustomL">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustomL" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers_L(document.getElementById('validationCustomL').value)" class="btn btn-primary">LOGIN</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Logic-->
+        <!-- Modal stickers -->
+        <div class="modal fade"  id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustom06">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom06" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom06').value,'Stickers')" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <!-- Modal Calendario -->
+        <div class="modal fade"  id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustom02">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom02" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom02').value,'Calendario')" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <!-- Modal Poster -->
+        <div class="modal fade"  id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustom03">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom03" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom03').value,'Poster')" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <!-- Modal Camisas -->
+        <div class="modal fade"  id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustom04">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom04" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom04').value,'Camisas')" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+
+        <!-- Modal Taza -->
+        <div class="modal fade"  id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Digite su cedula para continuar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <label for="validationCustom05">Cedula</label>
+                <input maxlength="11" type="tel" name="first" class="form-control" id="validationCustom05" placeholder="XXXXXXXXXXX" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button  type="button" onclick="onlyNumbers(document.getElementById('validationCustom05').value,'Taza')" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -183,16 +333,16 @@
               <h3><a href="#">Stickers </a></h3>
               <p class="mb-4">Diseña tus stickers con nosotros.</p>
               <div>
-                <script>
-                  type_prod = 'sticker';
-                </script>
                 <%if(session === 0) {%>
-                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal">
+                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal1">
                     Añadir al Carrito
                   </button>
                 <%}
                 else {%>
-                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(<%=cd,"sticker"%>)">
+<!--                  <script>-->
+<!--                    const y = "";-->
+<!--                  </script>-->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Stickers')">
                   Añadir al Carrito
                 </button>
                 <%}%>
@@ -211,7 +361,19 @@
               <h3><a href="#">Calendarios y Más.</a></h3>
               <p class="mb-4">Diseñamos calendarios y mucho máas productos a fines.</p>
               <div>
-                <a href="#" class="btn btn-black mr-1 rounded-0">Añadir al Carrito</a>
+                <%if(session === 0) {%>
+                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal2">
+                    Añadir al Carrito
+                  </button>
+                <%}
+                else {%>z
+<!--                  <script>-->
+<!--                    var z = "";-->
+<!--                  </script>-->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Calendario')">
+                  Añadir al Carrito
+                </button>
+                <%}%>
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
@@ -227,7 +389,19 @@
               <h3><a href="#">Posters y Más</a></h3>
               <p class="mb-4">Imaginalo y nosotros hacemos el resto.</p>
               <div>
-                <a href="#" class="btn btn-black mr-1 rounded-0">Añadir al Carrito</a>
+                <%if(session === 0) {%>
+                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal3">
+                    Añadir al Carrito
+                  </button>
+                <%}
+                else {%>
+<!--                  <script>-->
+<!--                    var p = "";-->
+<!--                  </script>-->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Poster')">
+                  Añadir al Carrito
+                </button>
+                <%}%>
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
@@ -243,7 +417,19 @@
               <h3><a href="#">T-Shirts</a></h3>
               <p class="mb-4">Personalizamos tus T-Shirts.</p>
               <div>
-                <a href="#" class="btn btn-black mr-1 rounded-0">Añadir al Carrito</a>
+                <%if(session === 0) {%>
+                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal4">
+                    Añadir al Carrito
+                  </button>
+                <%}
+                else {%>
+<!--                  <script>-->
+<!--                    var o = "";-->
+<!--                  </script>-->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Camisas')">
+                  Añadir al Carrito
+                </button>
+                <%}%>
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
@@ -262,7 +448,19 @@
               <h3><a href="#">Tazas</a></h3>
               <p class="mb-4">Personalizamos tus tazas.</p>
               <div>
-                <a href="#" class="btn btn-black mr-1 rounded-0">Añadir al Carrito</a>
+                <%if(session === 0) {%>
+                  <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" data-target="#exampleModal5">
+                    Añadir al Carrito
+                  </button>
+                <%}
+                else {%>
+<!--                  <script>-->
+<!--                    var t = "";-->
+<!--                  </script>-->
+                <button type="button" class="btn btn-black mr-1 rounded-0" data-toggle="modal" onclick="onC(x,'Taza')">
+                  Añadir al Carrito
+                </button>
+                <%}%>
                 <a href="#" class="btn btn-black btn-outline-black ml-1 rounded-0">View</a>
               </div>
             </div>
@@ -497,8 +695,39 @@
 </script>
 <script>
   function onC(id,type) {
-    window.location.href="/session/"+id+"/"+type;
+    console.log("EL TIPO ES: "+type)
+    window.location ="/session/?id=" + id + "&type=" + type;
   }
+</script>
+<script>
+  function redCart(input) {
+    console.log("PLPPPPPPPPPPPPPPPPPPPPPPPP: "+input)
+    window.location ="/shop/cart/?id=" + input;
+  }
+</script>
+
+<script>
+  function onlyNumbers_L(input) {
+    var numbers = /^[0-9]+$/;
+    console.log(input)
+    if(input.match(numbers)){
+      if(input.length <11)
+      {
+        alert('Numero de Cedula Invalido.');
+      }else {
+        var url ="/Logic/?id="+input;
+        window.location =url
+        console.log("Estoy aqui"+url);
+        return true;
+
+      }
+    }
+    else
+    {
+      alert('Solo valores numericos.');
+    }
+  }
+
 </script>
 
 </body>

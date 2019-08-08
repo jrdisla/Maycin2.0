@@ -10,24 +10,27 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Cedula</th>
-        <th scope="col">Name</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Tienda</th>
         <th scope="col">Size</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Colores</th>
     </tr>
     </thead>
     <tbody>
 
 
+            <%for(let i=0;i<car.length;i++){%>
+            <tr>
+                <th scope="row"><%=(i+1)%></th>
+            <td><%=car[i].type%></td>
+            <td><%=car[i].tienda%></td>
+            <td><%=car[i].size%></td>
+            <td><%=car[i].cant%></td>
+            <td><%=car[i].colors%></td>
+            </tr>
+            <%}%>
 
-        <%car.forEach(function (data) {%>
-        <tr>
-            <th scope="row">1</th>
-            <td><%=data.cd%></td>
-            <td><%=data.name%></td>
-            <td><%=data.size%></td>
-        </tr>
-    <%})%>>
-        
 
     </tbody>
 </table>

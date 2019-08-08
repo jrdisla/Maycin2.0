@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   {
       session = 1;
       username = req.session.user;
+      console.log('estoy en index /'+username);
   }
   res.render('index', {
     title: 'Express',
@@ -15,6 +16,19 @@ router.get('/', function(req, res, next) {
     cd : username
   }
   );
+});
+
+router.get('/Logic/',function (req,res) {
+  var id = req.query.id;
+  if(req.session.user === undefined)
+  {
+    req.session.user = id;
+    res.redirect("/");
+  }
+  else
+  {
+    res.redirect("/");
+  }
 });
 
 router.get('/session/',function (req,res) {
@@ -27,12 +41,12 @@ router.get('/session/',function (req,res) {
       req.session.user = id;
       console.log("Setted user: "+req.session.user);
       res.redirect("/shop/?id="+id+"&type="+typ);
-      //res.redirect("/shop/"+req.session.user+"/"+typ);
+
   }
   else
   {
     console.log("hay user");
-    //res.redirect("/shop/"+req.session.user+"/"+req.params.type);
+    res.redirect("/shop/?id="+id+"&type="+typ);
   }
   // else
   // {

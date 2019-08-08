@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
     var id = req.query.id;
     var type = req.query.type;
-
+    console.log("LLEGUE A SHOP /");
    //
    // var item_shop = {
    //     type: 'cup',
@@ -39,7 +39,8 @@ router.get('/', function(req, res, next) {
        //    console.log(data.size);
            db.close();
            res.render("shop",{
-               'data':result
+               'data':result,
+               'type':type
            });
        });
    });
@@ -78,25 +79,31 @@ router.get('/', function(req, res, next) {
   //   //  console.log('El cliente es:')
   //  });
 
-router.get("cart/:id",function (req,res,next) {
-   dbo.collection('Carts').find({
-      "prods.cd": '12345678909'
-   }).toArray(function (err, result) {
-      result.forEach(function (data) {
-         let out = data.prods;
-         out.forEach(function (tr) {
-            console.log(tr.name);
-            console.log(tr.cd);
-         });
-         console.log('out: '+out);
+router.get("/cart/",function (req,res,next) {
+    const plp = req.query.id;
+    console.log("LLEGUE AL CARROOOOOOOOOOOOOOOOOOOOOOO"+plp);
+    mongodb.connect(url,function (err,db) {
+        var dbo = db.db("Maycin");
+        dbo.collection('Carts').find({
+            "prods.cd": plp
+        }).toArray(function (err, result) {
+            result.forEach(function (data) {
+                let out = data.prods;
+                out.forEach(function (tr) {
+                    console.log(tr.name);
+                    console.log(tr.cd);
+                });
+                console.log('out: '+out);
 
-         db.close();
-         res.render('shopcart',{
-            car:out
-         });
+                db.close();
+                res.render('shopcart',{
+                    car:out
+                });
 
-      })
-   });
+            })
+        });
+    })
+
 });
 let insertCart = function(dbo,cart,db){
    dbo.collection('Carts').insertOne(cart,function (err,result) {
@@ -138,6 +145,7 @@ router.post('/upload',(req,res) => {
    // var city = req.body.city;
    // var muni = req.body.muni;
    // var addr = req.body.addr;
+    var type = req.body.type;
    var info = req.body.info;
    var radio = req.body.radio;
    var size = req.body.size;
@@ -152,7 +160,7 @@ router.post('/upload',(req,res) => {
             throw err;
          if(res===0){
              let prod = [{
-                 type: 'shopping',
+                 type: type,
                  cd: cd_cliente,
                  tienda: tienda,
                  inf: info,
@@ -166,7 +174,7 @@ router.post('/upload',(req,res) => {
          }
          else {
              let prod = {
-                 type: 'shopping',
+                 type: type,
                  cd: cd_cliente,
                  tienda: tienda,
                  inf: info,
@@ -181,7 +189,7 @@ router.post('/upload',(req,res) => {
       });
     //  console.log("la cantidad es: "+ver);
      // insertCart(dbo,addr,db);
-      res.render('index');
+      res.redirect("/");
    });
 
  //  insertCart(dbo,prod,db);

@@ -75,6 +75,14 @@
     <section>
         <form action="/shop/upload" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
             <div class="form-row">
+
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom088">TIPO</label>
+                    <input type="text" name="type" class="form-control" id="validationCustom088" value=<%=type%> readonly  required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
 <!--                <div class="col-md-4 mb-3">-->
 <!--                    <label for="validationCustom01">Nombres</label>-->
 <!--                    <input type="text" name="first" class="form-control" id="validationCustom01" placeholder="Nombres" required>-->
@@ -147,7 +155,7 @@
                 <select name="size" class="custom-select" required>
                     <option value="">Tamaños</option>
             <%data.size.forEach(function (item,i=1) {%>
-                    <option value=<%=(i+1)%>><%=item%></option>
+                    <option value=<%=item%>><%=item%></option>
                     i++;
             <%})%>
                 </select>
@@ -157,7 +165,7 @@
                 <select name="cant" class="custom-select" required>
                     <option value="">Cantidad</option>
                     <%data.cantidad.forEach(function (ite,i=1){%>
-                        <option value=<%=i%>><%=ite%></option>
+                        <option value=<%=ite%>><%=ite%></option>
                     i++
                    <%})%>
 
