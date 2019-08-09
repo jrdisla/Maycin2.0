@@ -4,10 +4,7 @@
     <list default="true" id="f978cf7c-13cd-48bb-a79c-b998a6dec461" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/shop.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/shop.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shop.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/shopcart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shopcart.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -141,6 +138,7 @@
       <workItem from="1565213096268" duration="308000" />
       <workItem from="1565213431071" duration="847000" />
       <workItem from="1565279857981" duration="12769000" />
+      <workItem from="1565371164594" duration="5805000" />
     </task>
     <task id="LOCAL-00001" summary="id">
       <created>1563831773028</created>

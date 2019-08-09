@@ -31,6 +31,11 @@ router.get('/Logic/',function (req,res) {
   }
 });
 
+router.get('/logout/',function (req,res) {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 router.get('/session/',function (req,res) {
   console.log("llego");
   var id = req.query.id;
