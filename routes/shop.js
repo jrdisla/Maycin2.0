@@ -1,7 +1,9 @@
 const Cart = require('../Class/Cart');
 var express = require('express');
-var router = express.Router();
+var router = express.Router()
+var path = require('path');
 var mongodb = require('mongodb').MongoClient;
+
 router.use(express.static('public'));
 var outData ='';
 // var insertCart = function(db,cart){
@@ -80,6 +82,17 @@ router.get('/', function(req, res, next) {
   //  });
 
 router.get("/cart/",function (req,res,next) {
+
+    var session = 0;
+    var username = '';
+    if(req.session.user !== undefined)
+    {
+        session = 1;
+        username = req.session.user;
+        console.log('estoy en index /'+username);
+    }
+
+
     const plp = req.query.id;
     console.log("LLEGUE AL CARROOOOOOOOOOOOOOOOOOOOOOO"+plp);
     mongodb.connect(url,function (err,db) {
@@ -97,7 +110,9 @@ router.get("/cart/",function (req,res,next) {
 
                 db.close();
                 res.render('shopcart',{
-                    car:out
+                    car:out,
+                    session: session,
+                    cd : username
                 });
 
             })

@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var shopRouter = require('./routes/shop');
 
 var app = express();
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
