@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var mongodb = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var session = 0;
@@ -74,6 +76,43 @@ router.get('/session', function(req, res, next) {
   {
     console.log("hay user");
   }
+});
+
+router.get('/insert',function (req,res) {
+
+  let item = {
+    type : "Tazas",
+    size : ["Pequeñas","Medianas","Grandes"],
+    cantidad: [10,20,30,50,100,200,300],
+    price :[
+      {
+
+        size:"Pequeñas",
+        price: 10,
+      },
+      {
+        size:"Medianas",
+        price: 12.5,
+      },
+      {
+        size:"Grandes",
+       price: 14.5
+      }
+
+    ]
+    };
+
+
+mongodb.connect(url,function (err,db) {
+  const dbo = db.db("Maycin");
+  dbo.collection("items").insertOne(item,function (err,result) {
+    if(err)
+      throw err;
+    db.close();
+      }
+
+  )
+})
 });
 
 

@@ -156,25 +156,28 @@ let findClient = function (dbo,cedula,db)
 router.post('/upload',(req,res) => {
    // var first = req.body.first;
    // var last = req.body.last;
-   var tienda = req.body.tienda;
+    let tienda = req.body.tienda;
    // var city = req.body.city;
    // var muni = req.body.muni;
    // var addr = req.body.addr;
-    var type = req.body.type;
-   var info = req.body.info;
-   var radio = req.body.radio;
-   var size = req.body.size;
-   var cant = req.body.cant;
-   var file = `./files/${req.files.file.name}`;
-   var cd_cliente = req.session.user;
+    let type = req.body.type;
+    let info = req.body.info;
+    let radio = req.body.radio;
+    let size = req.body.size;
+    let cant = req.body.cant;
+    let file = `./files/${req.files.file.name}`;
+    let cd_cliente = req.session.user;
+    let tday = new Date();
    mongodb.connect(url,function (err,db) {
       if(err) throw err;
-      var dbo = db.db("Maycin")
+      let dbo = db.db("Maycin");
+      let it = tday.getFullYear()+''+(tday.getMonth()+1)+''+tday.getDay()+''+tday.getHours()+''+tday.getMinutes()+''+tday.getSeconds()+''+tday.getMilliseconds();
       dbo.collection("Carts").find({cedula : cd_cliente}).limit(1).count(function (err, res) {
          if (err)
             throw err;
          if(res===0){
              let prod = [{
+                 id_i: it,
                  type: type,
                  cd: cd_cliente,
                  tienda: tienda,
@@ -189,6 +192,7 @@ router.post('/upload',(req,res) => {
          }
          else {
              let prod = {
+                 id_i : it,
                  type: type,
                  cd: cd_cliente,
                  tienda: tienda,

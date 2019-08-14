@@ -29,48 +29,81 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<header class="site-navbar py-4 bg-white js-sticky-header site-navbar-target" role="banner">
 
-    <div class="container">
-        <div class="row align-items-center">
+<div class="site-wrap">
 
-            <div class="col-6 col-xl-2">
-                <h1 class="mb-0 site-logo"><a href="index.html" class="text-black mb-0">Maycin<span class="text-primary">.</span> </a></h1>
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
             </div>
-            <div class="col-12 col-md-10 d-none d-xl-block">
-                <nav class="site-navigation position-relative text-right" role="navigation">
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
 
-                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li><a href="#home-section" class="nav-link">Home</a></li>
-                        <li><a href="#products-section" class="nav-link">Productos</a></li>
-                        <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a>
-                        </li><li><a href="#special-section" class="nav-link">Especiales</a></li>
-                        <%if(session == 1){%>
-                        <script>
-                            const plp = "<%=cd%>";
-                        </script>
-                        </li><a onclick="redCart(plp)" class="nav-link">Ver Carrito</a><li>
-                        </li><a class="nav-link">Hola!! <%=cd%></a><li>
-                            <%}
-                            else {%>
-                        </li>
-                        <a  class="nav-link" data-toggle="modal" data-target="#exampleModalL">
-                            Login
-                        </a>
-                        <%}%>
+    <div class="top-bar py-3 bg-light" id="home-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-6 text-left">
+                    <ul class="social-media">
+                        <li><a href="#" class=""><span class="icon-instagram"></span></a></li>
+                        <li><a href="#" class=""><span class="icon-whatsapp"></span></a></li>
                     </ul>
-                </nav>
+                </div>
+                <div class="col-6">
+                    <p class="mb-0 float-right">
+                        <span class="mr-3"><a href="tel://#"> <span class="icon-phone mr-2" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">(+1) 829 319 2420</span></a></span>
+                        <span><a href="#"><span class="icon-envelope mr-2" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">jdisla_dj@hotmail.com</span></a></span>
+                        <%if(session == 1){%>
+                        <span><a href="/logout/" onclick="location.replace('/logout/')" class="nav-link"><span class="icon-delete" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Desconectar <%=cd%></span> </a></span>
+                        <%}
+                        else {%>
+                        <span><a href="#login" class="nav-link" data-toggle="modal"><span class="icon-add" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black"> Inicar Sesion <%=cd%></span>
+                </a></span>
+                        <%}%>
+                    </p>
+
+                </div>
             </div>
-
-
-            <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
-
         </div>
     </div>
 
-</header>
-<table class="table">
-    <thead>
+    <header class="site-navbar py-4 bg-white js-sticky-header site-navbar-target" role="banner">
+
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-6 col-xl-2">
+                    <h1 class="mb-0 site-logo"><a href="index.html" class="text-black mb-0">Maycin<span class="text-primary">.</span> </a></h1>
+                </div>
+                <div class="col-12 col-md-10 d-none d-xl-block">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+
+                        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                            <li><a href="#home-section" class="nav-link">Home</a></li>
+                            <li><a href="#products-section" class="nav-link">Productos</a></li>
+                            <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a></li>
+                            <li><a href="#special-section" class="nav-link">Especiales</a></li>
+                            <%if(session == 1){%>
+                            <li><a href="/shop/cart/?id=<%=cd%>" onclick="location.replace('/shop/cart/?id=<%=cd%>')"><span class="icon-shopping_basket" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Ver Carrito</span></a></li>
+                            <%}%>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
+
+            </div>
+        </div>
+
+    </header>
+</div>
+<div style="width: 75%;position:absolute; left:0;">
+<table class="table table-hover">
+    <thead class="thead-light">
     <tr>
         <th scope="col">#</th>
         <th scope="col">Tipo</th>
@@ -78,11 +111,10 @@
         <th scope="col">Size</th>
         <th scope="col">Cantidad</th>
         <th scope="col">Colores</th>
+        <th scope="col">Accion</th>
     </tr>
     </thead>
     <tbody>
-
-
             <%for(let i=0;i<car.length;i++){%>
             <tr>
                 <th scope="row"><%=(i+1)%></th>
@@ -91,12 +123,27 @@
             <td><%=car[i].size%></td>
             <td><%=car[i].cant%></td>
             <td><%=car[i].colors%></td>
+                <td>
+                    <a href="#" class="badge badge-danger">Delete</a>
+                    <a href="#" class="badge badge-warning">Edit</a>
+                </td>
             </tr>
             <%}%>
 
 
     </tbody>
 </table>
+</div>
+<div class="card" style="width: 25%; float: right">
+    <div class="card-header">
+        Featured
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
