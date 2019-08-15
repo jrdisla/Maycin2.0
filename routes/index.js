@@ -79,40 +79,30 @@ router.get('/session', function(req, res, next) {
 });
 
 router.get('/insert',function (req,res) {
-
+let size = ["1x1","3x3","5X4","6X6","5X9"];
+let price = [5,7,10,14,21];
+for(let i =0;i<size.length;i++)
+{
   let item = {
-    type : "Tazas",
-    size : ["Pequeñas","Medianas","Grandes"],
-    cantidad: [10,20,30,50,100,200,300],
-    price :[
-      {
+    type:"Stickers",
+    size: size[i],
+    price: price[i]
+  };
+  mongodb.connect(url,function (err,db) {
+    const dbo = db.db("Maycin");
+    dbo.collection("prices").insertOne(item,function (err,result) {
+          if(err)
+            throw err;
+          db.close();
+        }
 
-        size:"Pequeñas",
-        price: 10,
-      },
-      {
-        size:"Medianas",
-        price: 12.5,
-      },
-      {
-        size:"Grandes",
-       price: 14.5
-      }
-
-    ]
-    };
+    )
+  });
+}
 
 
-mongodb.connect(url,function (err,db) {
-  const dbo = db.db("Maycin");
-  dbo.collection("items").insertOne(item,function (err,result) {
-    if(err)
-      throw err;
-    db.close();
-      }
 
-  )
-})
+
 });
 
 

@@ -89,35 +89,37 @@ router.get("/cart/",function (req,res,next) {
     {
         session = 1;
         username = req.session.user;
-        console.log('estoy en index /'+username);
+        const plp = req.query.id;
+        var price_t = 0;
+        mongodb.connect(url,function (err,db) {
+            var dbo = db.db("Maycin");
+            dbo.collection('Carts').find({
+                "prods.cd": plp
+            }).toArray(function (err, result) {
+                result.forEach(function (data) {
+                    let out = data.prods;
+                    out.forEach(function (pr) {
+
+                        dbo.collection('prices').findOne({
+                            type: pr.type,
+                            size: pr.size
+                        }).then(function (doc) {
+                            console.log(doc);
+                            price_t += doc.price;
+                            console.log(price_t)
+                        });
+                    });
+                    db.close();
+                    res.render('shopcart',{
+                        car:out,
+                        session: session,
+                        cd : username
+                    });
+
+                })
+            });
+        })
     }
-
-
-    const plp = req.query.id;
-    console.log("LLEGUE AL CARROOOOOOOOOOOOOOOOOOOOOOO"+plp);
-    mongodb.connect(url,function (err,db) {
-        var dbo = db.db("Maycin");
-        dbo.collection('Carts').find({
-            "prods.cd": plp
-        }).toArray(function (err, result) {
-            result.forEach(function (data) {
-                let out = data.prods;
-                out.forEach(function (tr) {
-                    console.log(tr.name);
-                    console.log(tr.cd);
-                });
-                console.log('out: '+out);
-
-                db.close();
-                res.render('shopcart',{
-                    car:out,
-                    session: session,
-                    cd : username
-                });
-
-            })
-        });
-    })
 
 });
 let insertCart = function(dbo,cart,db){
@@ -150,6 +152,14 @@ let findClient = function (dbo,cedula,db)
 
      })
   });
+};
+let calPrice = function(item){
+    mongodb.connect(url,function (err,db) {
+        let dbo = db.db("Maycin");
+
+    });
+
+
 };
 
 
@@ -223,4 +233,17 @@ router.post('/upload',(req,res) => {
 
 
 });
+
+router.get('/test',function (req,res) {
+   mongodb.connect(url,function (err,db) {
+       const dbo = db.db('Maycin');
+       dbo.collection('prices').findOne({
+           type: "Shopping",
+           size: "7X15"
+       }).then(function (doc) {
+           console.log(doc);
+       })
+   })
+});
+
 module.exports = router;
