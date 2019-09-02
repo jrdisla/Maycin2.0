@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var pjax    = require('express-pjax');
 const fileUpload = require('express-fileupload')
 const session = require('express-session');
 
@@ -13,6 +14,7 @@ var shopRouter = require('./routes/shop');
 
 var app = express();
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}));
+app.use(pjax());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

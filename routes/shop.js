@@ -1,6 +1,6 @@
 const Cart = require('../Class/Cart');
 var express = require('express');
-var router = express.Router()
+var router = express.Router();
 var path = require('path');
 var mongodb = require('mongodb').MongoClient;
 
@@ -83,40 +83,38 @@ router.get('/', function(req, res, next) {
 
 router.get("/cart/",function (req,res,next) {
 
-    var session = 0;
-    var username = '';
+    let session = 0;
+    let username = '';
     if(req.session.user !== undefined)
     {
         session = 1;
         username = req.session.user;
         const plp = req.query.id;
-        var price_t = 0;
         mongodb.connect(url,function (err,db) {
-            var dbo = db.db("Maycin");
+            let dbo = db.db("Maycin");
             dbo.collection('Carts').find({
                 "prods.cd": plp
             }).toArray(function (err, result) {
-                result.forEach(function (data) {
-                    let out = data.prods;
-                    out.forEach(function (pr) {
-
-                        dbo.collection('prices').findOne({
-                            type: pr.type,
-                            size: pr.size
-                        }).then(function (doc) {
-                            console.log(doc);
-                            price_t += doc.price;
-                            console.log(price_t)
-                        });
-                    });
-                    db.close();
+                console.log("RESULTTTTTTTTT"+result);
+                if(result.length > 0) {
+                    result.forEach(function (data) {
+                        let out = data.prods;
+                        //      db.close();
+                        sendprice(out, res, session, username, db);
+                    })
+                }
+                else
+                {
+                    console.log("AQUI?");
                     res.render('shopcart',{
-                        car:out,
+                        car:null,
                         session: session,
-                        cd : username
-                    });
+                        cd : username,
+                        price: 0,
+                        items: 0
 
-                })
+                    });
+                }
             });
         })
     }
@@ -234,6 +232,44 @@ router.post('/upload',(req,res) => {
 
 });
 
+let sendprice = function(out,res,session,username,db)
+{
+    let total_price = 0;
+    let price = 0;
+    let cant = 0;
+    let subTotal = 0;
+    let index = 0;
+        let dbo = db.db("Maycin");
+        console.log("OUTTTTTTTTTT"+out);
+        out.forEach(function (pr) {
+            dbo.collection('prices').findOne({
+                type: pr.type,
+                size: pr.size
+            },function (err,result) {
+                if (err) throw err;
+                price = parseFloat(result.price);
+                cant = parseFloat(pr.cant);
+                subTotal = price * cant;
+                total_price += subTotal;
+                if(index===(out.length-1))
+                {
+
+                    db.close();
+                    res.render('shopcart',{
+                        car:out,
+                        session: session,
+                        cd : username,
+                        price: total_price,
+                        items: out.length
+
+                    });
+                }
+                index++;
+
+            });
+        });
+};
+
 router.get('/test',function (req,res) {
    mongodb.connect(url,function (err,db) {
        const dbo = db.db('Maycin');
@@ -245,5 +281,49 @@ router.get('/test',function (req,res) {
        })
    })
 });
-
+router.delete('/delete/',function (req,res) {
+    let type = req.body.id;
+    mongodb.connect(url,function (err,db) {
+        let dbo = db.db("Maycin");
+        dbo.collection("Carts").update(
+            {
+                cedula:req.session.user
+            },
+            {
+                $pull: {
+                    prods: {
+                        id_i: type
+                    }
+                }
+            }
+            ,function (err,result) {
+                if(err) {
+                    console.log("err", err);
+                } else {
+                    console.log("sucessful");
+                  res.send("good");
+                }
+        })
+    })
+});
+let updateCart = function(req,res){
+    if(req.session.user !== undefined)
+    {
+        console.log("OCNO LLEGO");
+        var session = 1;
+        var username = req.session.user;
+        const plp = req.query.id;
+        mongodb.connect(url,function (err,db) {
+            let dbo = db.db("Maycin");
+            dbo.collection('Carts').find({
+                "prods.cd": plp
+            }).toArray(function (err, result) {
+                result.forEach(function (data) {
+                    let out = data.prods;
+                    sendprice(out,res,session,username,db);
+                })
+            });
+        })
+    }
+};
 module.exports = router;
