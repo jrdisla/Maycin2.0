@@ -240,7 +240,6 @@ let sendprice = function(out,res,session,username,db)
     let subTotal = 0;
     let index = 0;
         let dbo = db.db("Maycin");
-        console.log("OUTTTTTTTTTT"+out);
         out.forEach(function (pr) {
             dbo.collection('prices').findOne({
                 type: pr.type,
@@ -253,13 +252,13 @@ let sendprice = function(out,res,session,username,db)
                 total_price += subTotal;
                 if(index===(out.length-1))
                 {
-
+                    var num = 'RD$' + total_price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     db.close();
                     res.render('shopcart',{
                         car:out,
                         session: session,
                         cd : username,
-                        price: total_price,
+                        price: num,
                         items: out.length
 
                     });
@@ -326,4 +325,54 @@ let updateCart = function(req,res){
         })
     }
 };
+router.get("/confirm/",function (req,res) {
+    let session = 0;
+    let username = '';
+    if(req.session.user !== undefined)
+    {
+        session = 1;
+        username = req.session.user;
+        mongodb.connect(url,function (err,db) {
+            let dbo = db.db("Maycin");
+            dbo.collection('Carts').find({
+                "prods.cd": req.session.user
+            }).toArray(function (err, result) {
+                console.log("RESULTTTTTTTTT"+result);
+                if(result.length > 0) {
+                    result.forEach(function (data) {
+                        let out = data.prods;
+                        //      db.close();
+                        sendOrder(out, res,db);
+                    })
+                }
+                else
+                {
+                    console.log("AQUI?");
+                    res.render('shopcart',{
+                        car:null,
+                        session: session,
+                        cd : username,
+                        price: 0,
+                        items: 0
+
+                    });
+                }
+            });
+        })
+
+    }
+});
+
+let sendOrder = function(out,res,db)
+{
+    let dbo = db.db("Maycin");
+    dbo.collection("Orders").insertOne({
+        out
+    },function (err,result) {
+        if(err) throw err;
+       console.log(result);
+       db.close();
+    });
+};
+
 module.exports = router;
