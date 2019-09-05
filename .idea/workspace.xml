@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f978cf7c-13cd-48bb-a79c-b998a6dec461" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/views/order.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/12.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/17.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/5.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/6.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/shop.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shop.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/shopcart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shopcart.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +47,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,6 +61,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\juliodisla\WebstormProjects\Maycin2.0\views" />
       <recent name="C:\Users\Julio Disla\WebstormProjects\Maycin2.0" />
       <recent name="C:\Users\Julio Disla\WebstormProjects\Maycin2.0\views" />
       <recent name="C:\Users\Julio Disla\WebstormProjects\Maycin2.0\public\images" />
@@ -142,7 +151,8 @@
       <workItem from="1565803503454" duration="10565000" />
       <workItem from="1565890140569" duration="10474000" />
       <workItem from="1567430326091" duration="22028000" />
-      <workItem from="1567627782504" duration="2637000" />
+      <workItem from="1567627782504" duration="3254000" />
+      <workItem from="1567696487406" duration="5498000" />
     </task>
     <task id="LOCAL-00001" summary="id">
       <created>1563831773028</created>
@@ -235,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567457471257</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="db progress">
+      <created>1567631047563</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1567631047563</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

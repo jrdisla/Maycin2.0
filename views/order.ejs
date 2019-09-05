@@ -7,7 +7,7 @@
 
 
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -73,68 +73,60 @@
     </div>
 </section>
     <section>
-        <form action="/shop/upload" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+        <form action="/shop/order/done/" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
             <div class="form-row">
-
                 <div class="col-md-4 mb-3">
-                    <label for="validationCustom088">TIPO</label>
-                    <input type="text" name="type" class="form-control" id="validationCustom088" value=<%=type%> readonly  required>
+                    <label for="validationCustom01">Nombres</label>
+                    <input type="text" name="name" class="form-control" id="validationCustom01" placeholder="Nombres" required>
                     <div class="valid-feedback">
-                        Looks good!
+                        Se ve bien!
                     </div>
                 </div>
-<!--                <div class="col-md-4 mb-3">-->
-<!--                    <label for="validationCustom01">Nombres</label>-->
-<!--                    <input type="text" name="first" class="form-control" id="validationCustom01" placeholder="Nombres" required>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Looks good!-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 mb-3">-->
-<!--                    <label for="validationCustom02">Apellidos</label>-->
-<!--                    <input type="text" name="last" class="form-control" id="validationCustom02" placeholder="Apellidos"  required>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Looks good!-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="col-md-4 mb-3">
-                    <label for="validationCustom02">Tienda y/o Negocio</label>
-                    <input type="text" name="tienda" class="form-control" id="validationCustom02" placeholder="Tienda y/o Negocio"  required>
+                    <label for="validationCustom02">Apellidos</label>
+                    <input type="text" name="last" class="form-control" id="validationCustom02" placeholder="Apellidos"  required>
                     <div class="valid-feedback">
-                        Looks good!
+                        Se ve bien!
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Telefono</label>
+                    <input type="text" name="tel" class="form-control" id="validationCustom02" placeholder="Telefono"  required>
+                    <div class="valid-feedback">
+                        Se ve bien!
                     </div>
                 </div>
             </div>
             <div class="form-row">
-<!--                <div class="col-md-6 mb-3">-->
-<!--                    <label for="validationCustom03">Ciudad</label>-->
-<!--                    <input type="text" name="city" class="form-control" id="validationCustom03" placeholder="Ciudad" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid city.-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 mb-3">-->
-<!--                    <label for="validationCustom04">Municipio</label>-->
-<!--                    <input type="text" name="muni" class="form-control" id="validationCustom04" placeholder="Municipio" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid state.-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 mb-3">-->
-<!--                    <label for="validationCustom05">Dirección</label>-->
-<!--                    <input type="text" name="addr" class="form-control" id="validationCustom05" placeholder="Dirección" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid zip.-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
-            <div class="mb-3">
-                <label for="validationTextarea">Información Especial sobre el producto</label>
-                <textarea name="info" class="form-control is-invalid" id="validationTextarea" placeholder="Ejemplo: Agregar iconos de redes sociales. Utilizar cordones de color rojo..." required></textarea>
-                <div class="invalid-feedback">
-                    Por favor introduzca informaciones sobre el producto.
+                <div class="col-md-6 mb-3">
+                    <label for="validationCustom03">Ciudad</label>
+                    <input type="text" name="city" class="form-control" id="validationCustom03" placeholder="Provincia" required>
+                    <div class="invalid-feedback">
+                        Especifique una ciudad.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationCustom04">Provincia</label>
+                    <input type="text" name="provi" class="form-control" id="validationCustom04" placeholder="Ciudad" required>
+                    <div class="invalid-feedback">
+                        Especifique una provincia
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationCustom05">Dirección</label>
+                    <input type="text" name="addr" class="form-control" id="validationCustom05" placeholder="Dirección" required>
+                    <div class="invalid-feedback">
+                        Especifique una direccion
+                    </div>
                 </div>
             </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="validationTextarea">Información Especial sobre el producto</label>-->
+<!--                <textarea name="info" class="form-control is-invalid" id="validationTextarea" placeholder="Ejemplo: Agregar iconos de redes sociales. Utilizar cordones de color rojo..." required></textarea>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Por favor introduzca informaciones sobre el producto.-->
+<!--                </div>-->
+<!--            </div>-->
 
 <!--            <div class="custom-control custom-checkbox mb-3">-->
 <!--                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>-->
@@ -142,48 +134,24 @@
 <!--                <div class="invalid-feedback">Debe Aceptar</div>-->
 <!--            </div>-->
 
+            <div>
+                <h5>Se le puede contactar via whasapp?</h5>
+            </div>
+
             <div class="custom-control custom-radio">
-                <input type="radio" class="custom-control-input" id="customControlValidation2" value="1" name="radio" required>
-                <label class="custom-control-label" for="customControlValidation2">Logo de 2 o menos colores</label>
+                <input type="radio" class="custom-control-input" id="customControlValidation2" value="SI" name="radio" required>
+                <label class="custom-control-label" for="customControlValidation2">Si</label>
             </div>
             <div class="custom-control custom-radio mb-3">
-                <input type="radio" class="custom-control-input" id="customControlValidation3" value="2" name="radio" required>
-                <label class="custom-control-label" for="customControlValidation3">Logo de 4 o mas colores</label>
+                <input type="radio" class="custom-control-input" id="customControlValidation3" value="NO" name="radio" required>
+                <label class="custom-control-label" for="customControlValidation3">NO</label>
                 <div class="invalid-feedback">Debe seleccionar</div>
             </div>
-            <div class="form-group">
-                <select name="size" class="custom-select" required>
-                    <option value="">Tamaños</option>
-            <%data.size.forEach(function (item,i=1) {%>
-                    <option value=<%=item%>><%=item%></option>
-                    i++;
-            <%})%>
-                </select>
-                <div class="invalid-feedback">Debe seleccionar un tamaño</div>
-            </div>
-            <div class="form-group">
-                <select name="cant" class="custom-select" required>
-                    <option value="">Cantidad</option>
-                    <%data.cantidad.forEach(function (ite,i=1){%>
-                        <option value=<%=ite%>><%=ite%></option>
-                    i++
-                   <%})%>
-
-
-                </select>
-                <div class="invalid-feedback">Debe seleccionar la cantidad</div>
-            </div>
-
-            <div class="custom-file">
-                <input type="file" name="file" class="custom-file-input" id="validatedCustomFile" required>
-                <label class="custom-file-label" for="validatedCustomFile">Subir LOGO...</label>
-                <div class="invalid-feedback">Por favor seleccione su logo</div>
-            </div>
-            <div>
-                <p>
-
-                </p>
-            </div>
+<!--            <div class="custom-control custom-radio mb-3">-->
+<!--                <input type="radio" class="custom-control-input" id="customControlValidation3" value="2" name="radio" required>-->
+<!--                <label class="custom-control-label" for="customControlValidation3">Logo de 4 o mas colores</label>-->
+<!--                <div class="invalid-feedback">Debe seleccionar</div>-->
+<!--            </div>-->
             <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
                 <label class="custom-control-label" for="customControlValidation1">Reviso todo lo necesario?</label>
@@ -215,11 +183,16 @@
 
 </section>
   <footer class="footer-area">
+      <div>
+          <p>
+
+          </p>
+      </div>
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
           <div class="footer-logo">
-            <a href="index.html"><img width="100" height="100" src="images/logo.jpeg" alt=""></a>
+            <a href="index.html"><img width="100" height="100" src="/images/logo.jpeg" alt=""></a>
           </div>
           <!-- Copywrite -->
           <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -232,20 +205,20 @@
 
 </div> <!-- .site-wrap -->
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
+<script src="/js/jquery.sticky.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>

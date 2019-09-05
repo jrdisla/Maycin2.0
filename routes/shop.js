@@ -5,40 +5,20 @@ var path = require('path');
 var mongodb = require('mongodb').MongoClient;
 
 router.use(express.static('public'));
-var outData ='';
-// var insertCart = function(db,cart){
-//   db.conllection('Carts').insertOne({
-//      cedula : cart.id,
-//      productos: cart.prods
-//   });
-// };
+
 var url = "mongodb://localhost:27017/";
 
 router.get('/', function(req, res, next) {
 
     var id = req.query.id;
     var type = req.query.type;
-    console.log("LLEGUE A SHOP /");
-   //
-   // var item_shop = {
-   //     type: 'cup',
-   //     size: ['Pequeñas','Medianas','Grandes'],
-   //     cantidad: [5,10,25,50,100,200,300,400,500]
-   //
-   // };
     var data = {};
    mongodb.connect(url,function (err,db) {
        var dbo = db.db("Maycin");
-       // dbo.collection('items').insertOne(item_shop,function (err,result) {
-       //     if (err)
-       //         throw err;
-       //     console.log(result);
-       // });
        dbo.collection('items').findOne({type:type},function (err,result) {
            data = result;
            if(err)
                throw err;
-       //    console.log(data.size);
            db.close();
            res.render("shop",{
                'data':result,
@@ -47,39 +27,6 @@ router.get('/', function(req, res, next) {
        });
    });
 });
-  //  var cart = new Cart(id,[{
-  //     name: 'Nuevo',
-  //     size: '24',
-  //     cd: id
-  //  }]);
-  //
-  //  var toAdd = {
-  //     name: 'function',
-  //     size: '25',
-  //     cd: id
-  //  };
-  //
-  //  var url = "mongodb://localhost:27017/";
-  //  mongodb.connect(url,function (err,db) {
-  //     if(err) throw err;
-  //
-  //     console.log(cart);
-  //     var dbo = db.db("Maycin");
-  //
-  //     insertCart(dbo,cart,db);
-  //    // addTocart(dbo,toAdd,id);
-  //
-  // //    findClient(dbo,'12345678909',db);
-  // //     let daw = findClient(dbo,'12345678909',db);
-  // //     console.log("a");
-  // //     console.log("hola"+daw)
-  //
-  //     // for(let i=0;i<arr.length;i++)
-  //     // {
-  //     //    console.log(arr[i].size);
-  //     // }S
-  //   //  console.log('El cliente es:')
-  //  });
 
 router.get("/cart/",function (req,res,next) {
 
@@ -99,7 +46,6 @@ router.get("/cart/",function (req,res,next) {
                 if(result.length > 0) {
                     result.forEach(function (data) {
                         let out = data.prods;
-                        //      db.close();
                         sendprice(out, res, session, username, db);
                     })
                 }
@@ -125,7 +71,6 @@ let insertCart = function(dbo,cart,db){
       if (err) throw err;
       console.log("El resultado es:"+result);
       db.close;
-     // db.close();
    })
 };
 let addTocart = function(dbo,toAdd,id,db){
@@ -151,23 +96,9 @@ let findClient = function (dbo,cedula,db)
      })
   });
 };
-let calPrice = function(item){
-    mongodb.connect(url,function (err,db) {
-        let dbo = db.db("Maycin");
-
-    });
-
-
-};
-
 
 router.post('/upload',(req,res) => {
-   // var first = req.body.first;
-   // var last = req.body.last;
     let tienda = req.body.tienda;
-   // var city = req.body.city;
-   // var muni = req.body.muni;
-   // var addr = req.body.addr;
     let type = req.body.type;
     let info = req.body.info;
     let radio = req.body.radio;
@@ -214,22 +145,8 @@ router.post('/upload',(req,res) => {
          }
          db.close();
       });
-    //  console.log("la cantidad es: "+ver);
-     // insertCart(dbo,addr,db);
       res.redirect("/");
    });
-
- //  insertCart(dbo,prod,db);
-   // var fact = new Fact(first,last,city,muni,addr,tienda,'41','shop',size,cant,file,info,'2 colors',tienda,cant);
-   // console.log(fact.user.cedula);
-   // let EDFile = req.files.file
-   // EDFile.mv(`./files/${EDFile.name}`,err => {
-   //    if(err) return res.status(500).send({ message : err })
-   //
-   //    return res.status(200).send({ message : 'File upload' })
-   // })
-
-
 });
 
 let sendprice = function(out,res,session,username,db)
@@ -363,16 +280,60 @@ router.get("/confirm/",function (req,res) {
     }
 });
 
-let sendOrder = function(out,res,db)
+let sendOrder = function(out,res,sessionid,db,name,last,dir,city,provin,radio,tele)
 {
+    let tday = new Date();
+    let it = tday.getFullYear()+''+(tday.getMonth()+1)+''+tday.getDay()+''+tday.getHours()+''+tday.getMinutes()+''+tday.getSeconds()+''+tday.getMilliseconds();
     let dbo = db.db("Maycin");
     dbo.collection("Orders").insertOne({
-        out
+        id: it,
+        Nombre: name,
+        Apellido: last,
+        Direccion: dir,
+        Ciudad: city,
+        Provincia: provin,
+        Cedula: sessionid,
+        WhatsApp: radio,
+        Telefono: tele,
+        Productos:out
     },function (err,result) {
         if(err) throw err;
        console.log(result);
        db.close();
     });
 };
+router.get("/order/",function (req,res) {
+   res.render("order")
+});
+router.post("/order/done/",function (req,res) {
+let name = req.body.name;
+let lastn = req.body.last;
+let dir = req.body.addr;
+let city = req.body.city;
+let provin = req.body.provi;
+let radio = req.body.radio;
+let tele = req.body.tel;
+    let sessionid = 0;
+    let username = '';
+    if(req.session.user !== undefined)
+    {
+        username = req.session.user;
+        mongodb.connect(url,function (err,db) {
+            let dbo = db.db("Maycin");
+            dbo.collection('Carts').find({
+                "prods.cd": req.session.user
+            }).toArray(function (err, result) {
+                console.log("RESULTTTTTTTTT"+result);
+                if(result.length > 0) {
+                    result.forEach(function (data) {
+                        let out = data.prods;
+                        sendOrder(out, res,username,db,name,lastn,dir,city,provin,radio,tele);
+                    })
+                }
+            });
+        })
 
+    }
+
+});
 module.exports = router;
