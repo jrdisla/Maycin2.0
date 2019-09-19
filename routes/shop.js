@@ -46,7 +46,7 @@ router.get("/cart/",function (req,res,next) {
                 if(result.length > 0) {
                     result.forEach(function (data) {
                         let out = data.prods;
-                        sendprice(out, res, session, username, db);
+                        sendprice(out, res, session, username, db,0,null,null,null,null,null,null,null);
                     })
                 }
                 else
@@ -149,7 +149,7 @@ router.post('/upload',(req,res) => {
    });
 });
 
-let sendprice = function(out,res,session,username,db)
+let sendprice = function(out,res,session,username,db,val,name,last,dir,city,provin,tele,id)
 {
     let total_price = 0;
     let price = 0;
@@ -171,14 +171,35 @@ let sendprice = function(out,res,session,username,db)
                 {
                     var num = 'RD$' + total_price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     db.close();
-                    res.render('shopcart',{
-                        car:out,
-                        session: session,
-                        cd : username,
-                        price: num,
-                        items: out.length
+                    if(val ===0){
+                        res.render('shopcart',{
+                            car:out,
+                            session: session,
+                            cd : username,
+                            price: num,
+                            items: out.length
 
-                    });
+                        });
+                    }
+                    else
+                    {
+                        res.render('orders',{
+                            id:id,
+                            name:name,
+                            last:last,
+                            dir:dir,
+                            city:city,
+                            provin:provin,
+                            tele: tele,
+                            car:out,
+                            session: session,
+                            cd : username,
+                            price: num,
+                            items: out.length
+
+                        });
+                    }
+
                 }
                 index++;
 
@@ -236,7 +257,7 @@ let updateCart = function(req,res){
             }).toArray(function (err, result) {
                 result.forEach(function (data) {
                     let out = data.prods;
-                    sendprice(out,res,session,username,db);
+                    sendprice(out,res,session,username,db,0,null,null,null,null,null,null,null);
                 })
             });
         })
@@ -271,7 +292,6 @@ router.get("/confirm/",function (req,res) {
                         cd : username,
                         price: 0,
                         items: 0
-
                     });
                 }
             });
@@ -299,9 +319,23 @@ let sendOrder = function(out,res,sessionid,db,name,last,dir,city,provin,radio,te
     },function (err,result) {
         if(err) throw err;
        console.log(result);
-       db.close();
+       deleteFromcart(db,sessionid)
+       //db.close();
+    });
+
+
+};
+
+let deleteFromcart = function (db,cd) {
+    let dbo = db.db("Maycin");
+    var myquery = { cedula: cd };
+    dbo.collection("Carts").deleteOne(myquery, function(err, obj) {
+        if (err) throw err;
+        console.log("1 document deleted");
+        db.close();
     });
 };
+
 router.get("/order/",function (req,res) {
    res.render("order")
 });
@@ -313,7 +347,6 @@ let city = req.body.city;
 let provin = req.body.provi;
 let radio = req.body.radio;
 let tele = req.body.tel;
-    let sessionid = 0;
     let username = '';
     if(req.session.user !== undefined)
     {
@@ -336,4 +369,74 @@ let tele = req.body.tel;
     }
 
 });
+
+router.get("/orders/",function (req,res) {
+
+    let session = 0;
+    if(req.session.user !== undefined)
+    {
+        session = 1;
+        mongodb.connect(url,function (err,db) {
+           let dbo = db.db("Maycin");
+           dbo.collection("Orders").find({
+               "Productos.cd":req.query.id
+           }).toArray(function (err,result) {
+               if(err)
+                   throw err;
+               result.forEach(function (data) {
+                   let Nombre= data.Nombre;
+                   let Apellido= data.Apellido;
+                   let Direccion= data.Direccion;
+                   let Ciudad= data.Ciudad;
+                   let  Provincia= data.Provincia;
+                   let   Telefono= data.Telefono;
+                   let id = data.id;
+                   let out = data.Productos;
+                   console.log("JODERRRRRRRRRRRRRRRRRRRR");
+                   console.log("11"+1);
+                   console.log("11"-1);
+                   sendprice(out,res,session,req.query.id,db,1,Nombre,Apellido,Direccion,Ciudad,Provincia,Telefono,id);
+               })
+           });
+        });
+    }
+
+    // let session = 0;
+    // let username = '';
+    // if(req.session.user !== undefined)
+    // {
+    //     session = 1;
+    //     username = req.session.user;
+    //     const plp = req.query.id;
+    //     mongodb.connect(url,function (err,db) {
+    //         let dbo = db.db("Maycin");
+    //         dbo.collection('Orders').find({
+    //             "Productos.cd": plp
+    //         }).toArray(function (err, result) {
+    //             console.log("RESULTTTTTTTTT"+result);
+    //             if(result.length > 0) {
+    //                 result.forEach(function (data) {
+    //                     let out = data.prods;
+    //                     console.log("de ordenes: "+out);
+    //                     sendprice(out, res, session, username, db);
+    //                 })
+    //             }
+    //             else
+    //             {
+    //                 console.log("AQUI?");
+    //                 res.render('shopcart',{
+    //                     car:null,
+    //                     session: session,
+    //                     cd : username,
+    //                     price: 0,
+    //                     items: 0
+    //
+    //                 });
+    //             }
+    //         });
+    //     })
+    // }
+
+});
+
 module.exports = router;

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="top-bar py-3 bg-light" id="home-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-6 text-left">
+                    <ul class="social-media">
+                        <li><a href="#" class=""><span class="icon-instagram"></span></a></li>
+                        <li><a href="#" class=""><span class="icon-whatsapp"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <p class="mb-0 float-right">
+                        <span class="mr-3"><a href="tel://#"> <span class="icon-phone mr-2" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">(+1) 829 319 2420</span></a></span>
+                        <span><a href="#"><span class="icon-envelope mr-2" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">jdisla_dj@hotmail.com</span></a></span>
+                        <%if(session == 1){%>
+                        <span><a href="/logout/" onclick="location.replace('/logout/')" class="nav-link"><span class="icon-delete" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Desconectar <%=cd%></span> </a></span>
+                        <%}
+                        else {%>
+                        <span><a href="#login" class="nav-link" data-toggle="modal"><span class="icon-add" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black"> Inicar Sesion <%=cd%></span>
+                </a></span>
+                        <%}%>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-navbar py-4 bg-white js-sticky-header site-navbar-target" role="banner">
+
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-6 col-xl-2">
+                    <h1 class="mb-0 site-logo"><a href="index.html" class="text-black mb-0">Maycin<span class="text-primary">.</span> </a></h1>
+                </div>
+                <div class="col-12 col-md-10 d-none d-xl-block">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+
+                        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                            <li><a href="#home-section" class="nav-link">Home</a></li>
+                            <li><a href="#products-section" class="nav-link">Productos</a></li>
+                            <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a></li>
+                            <li><a href="#special-section" class="nav-link">Especiales</a></li>
+                            <%if(session == 1){%>
+                            <li><a href="/shop/cart/?id=<%=cd%>" onclick="location.replace('/shop/cart/?id=<%=cd%>')"><span class="icon-shopping_basket" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Ver Carrito</span></a></li>
+                            <%}%>
+
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
+
+            </div>
+        </div>
+
+    </header>
+</div>
+<div >
+<table class="table table-hover">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col"># de Orden</th>
+        <th scope="col">Cedula</th>
+        <th scope="col">Nombre y Apellido</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Provincia</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Monto</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <%if(car !== null){%>
+            <%for(let i=0;i<car.length;i++){%>
+            <tr>
+                <th scope="row"><%=(i+1)%></th>
+            <td><%=id%></td>
+                <td><%=cd%></td>
+            <td><%=name +" "+ last%></td>
+            <td><%=city%></td>
+            <td><%=provin%></td>
+            <td><%=dir%></td>
+                <td><%=tele%></td>
+                <td><%=price%></td>
+                 </tr>
+            <%}%>
+ <%}else{%>
+    <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+        </td>
+    </tr>
+    <%}%>
+    </tbody>
+</table>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    function deleteItem(input) {
+        $.ajax({
+            type: "DELETE",
+            url: "/shop/delete/",
+            data :{
+                id: input
+            },
+            success: function (result) {
+                location.reload();
+            }
+        })
+    }
+</script>
+
+</html>
