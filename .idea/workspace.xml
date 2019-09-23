@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f978cf7c-13cd-48bb-a79c-b998a6dec461" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/views/orders.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/site.webmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/shop.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/orders.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/orders.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/shop.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shop.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/shopcart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/shopcart.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +157,9 @@
       <workItem from="1567696487406" duration="6063000" />
       <workItem from="1568400764059" duration="629000" />
       <workItem from="1568907226227" duration="3717000" />
-      <workItem from="1568926767995" duration="1944000" />
+      <workItem from="1568926767995" duration="2462000" />
+      <workItem from="1569004712333" duration="3450000" />
+      <workItem from="1569242383699" duration="6959000" />
     </task>
     <task id="LOCAL-00001" summary="id">
       <created>1563831773028</created>
@@ -255,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567719157658</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="db progress">
+      <created>1568928911357</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1568928911357</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

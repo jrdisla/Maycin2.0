@@ -75,18 +75,15 @@
             <div class="row align-items-center">
 
                 <div class="col-6 col-xl-2">
-                    <h1 class="mb-0 site-logo"><a href="index.html" class="text-black mb-0">Maycin<span class="text-primary">.</span> </a></h1>
+                    <h1 class="mb-0 site-logo"><a href="/" class="text-black mb-0">Maycin<span class="text-primary">.</span> </a></h1>
                 </div>
                 <div class="col-12 col-md-10 d-none d-xl-block">
                     <nav class="site-navigation position-relative text-right" role="navigation">
 
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                            <li><a href="#home-section" class="nav-link">Home</a></li>
-                            <li><a href="#products-section" class="nav-link">Productos</a></li>
-                            <li><a href="#about-section" class="nav-link">Acerca de Nosotros</a></li>
-                            <li><a href="#special-section" class="nav-link">Especiales</a></li>
+                            <li><a href="/" class="nav-link">Home</a></li>
                             <%if(session == 1){%>
-                            <li><a href="/shop/cart/?id=<%=cd%>" onclick="location.replace('/shop/cart/?id=<%=cd%>')"><span class="icon-shopping_basket" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Ver Carrito</span></a></li>
+                            <li><a href="/shop/orders/?id=<%=cd%>" onclick="location.replace('/shop/orders/?id=<%=cd%>')"><span class="icon-shop" style="position: relative; top: 2px;"></span><span class="d-none d-lg-inline-block text-black">Ver Ordernes</span></a></li>
                             <%}%>
 
                         </ul>
@@ -101,48 +98,38 @@
 
     </header>
 </div>
+
+<%if(car !== null){%>
+
 <div style="width: 75%;position:absolute; left:0;">
-<table class="table table-hover">
-    <thead class="thead-light">
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Tienda</th>
-        <th scope="col">Size</th>
-        <th scope="col">Cantidad</th>
-        <th scope="col">Colores</th>
-        <th scope="col">Accion</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%if(car !== null){%>
-            <%for(let i=0;i<car.length;i++){%>
-            <tr>
-                <th scope="row"><%=(i+1)%></th>
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Tienda</th>
+            <th scope="col">Size</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Colores</th>
+            <th scope="col">Accion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%for(let i=0;i<car.length;i++){%>
+        <tr>
+            <th scope="row"><%=(i+1)%></th>
             <td><%=car[i].type%></td>
             <td><%=car[i].tienda%></td>
             <td><%=car[i].size%></td>
             <td><%=car[i].cant%></td>
             <td><%=car[i].colors%></td>
-                <td>
-                    <a href="#" id="delete" onclick="deleteItem(<%=car[i].id_i%>)" class="badge badge-danger">Delete</a>
-                </td>
-            </tr>
-            <%}%>
- <%}else{%>
-    <tr>
-        <th scope="row"></th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-        </td>
-    </tr>
-    <%}%>
-    </tbody>
-</table>
+            <td>
+                <a href="#" id="delete" onclick="deleteItem(<%=car[i].id_i%>)" class="badge badge-danger">Delete</a>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
 </div>
 <div class="card" style="width: 25%; float: right">
     <div class="card-header thead-light">
@@ -154,6 +141,39 @@
         <li class="list-group-item"><a type="button"  href="/shop/order/" class="btn btn-warning">Ordenar</a></li>
     </ul>
 </div>
+
+<%}else{%>
+
+<div>
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Tienda</th>
+            <th scope="col">Size</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Colores</th>
+            <th scope="col">Accion</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<%}%>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -1,20 +1,18 @@
 const Cart = require('../Class/Cart');
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var mongodb = require('mongodb').MongoClient;
+let express = require('express');
+let router = express.Router();
+let path = require('path');
+let mongodb = require('mongodb').MongoClient;
 
 router.use(express.static('public'));
 
-var url = "mongodb://localhost:27017/";
+let url = "mongodb://localhost:27017/";
 
 router.get('/', function(req, res, next) {
-
-    var id = req.query.id;
-    var type = req.query.type;
-    var data = {};
+    let type = req.query.type;
+    let data = {};
    mongodb.connect(url,function (err,db) {
-       var dbo = db.db("Maycin");
+       let dbo = db.db("Maycin");
        dbo.collection('items').findOne({type:type},function (err,result) {
            data = result;
            if(err)
@@ -82,21 +80,6 @@ let addTocart = function(dbo,toAdd,id,db){
    db.close();
 };
 
-let findClient = function (dbo,cedula,db)
-{
-  dbo.collection('Carts').find({
-     "prods.cd": cedula
-  }).toArray(function (err, result) {
-     result.forEach(function (data) {
-        let out = data.prods;
-        console.log('out: '+out);
-        db.close();
-        return out;
-
-     })
-  });
-};
-
 router.post('/upload',(req,res) => {
     let tienda = req.body.tienda;
     let type = req.body.type;
@@ -126,7 +109,7 @@ router.post('/upload',(req,res) => {
                  cant: cant,
                  logo: file
              }];
-             var addr = new Cart(cd_cliente,prod);
+             let addr = new Cart(cd_cliente,prod);
             insertCart(dbo,addr,db);
          }
          else {
@@ -169,7 +152,7 @@ let sendprice = function(out,res,session,username,db,val,name,last,dir,city,prov
                 total_price += subTotal;
                 if(index===(out.length-1))
                 {
-                    var num = 'RD$' + total_price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    let num = 'RD$' + total_price.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     db.close();
                     if(val ===0){
                         res.render('shopcart',{
@@ -207,17 +190,6 @@ let sendprice = function(out,res,session,username,db,val,name,last,dir,city,prov
         });
 };
 
-router.get('/test',function (req,res) {
-   mongodb.connect(url,function (err,db) {
-       const dbo = db.db('Maycin');
-       dbo.collection('prices').findOne({
-           type: "Shopping",
-           size: "7X15"
-       }).then(function (doc) {
-           console.log(doc);
-       })
-   })
-});
 router.delete('/delete/',function (req,res) {
     let type = req.body.id;
     mongodb.connect(url,function (err,db) {
@@ -246,9 +218,8 @@ router.delete('/delete/',function (req,res) {
 let updateCart = function(req,res){
     if(req.session.user !== undefined)
     {
-        console.log("OCNO LLEGO");
-        var session = 1;
-        var username = req.session.user;
+        let session = 1;
+        let username = req.session.user;
         const plp = req.query.id;
         mongodb.connect(url,function (err,db) {
             let dbo = db.db("Maycin");
@@ -273,13 +244,12 @@ router.get("/confirm/",function (req,res) {
         mongodb.connect(url,function (err,db) {
             let dbo = db.db("Maycin");
             dbo.collection('Carts').find({
-                "prods.cd": req.session.user
+                "prods.cd": username
             }).toArray(function (err, result) {
                 console.log("RESULTTTTTTTTT"+result);
                 if(result.length > 0) {
                     result.forEach(function (data) {
                         let out = data.prods;
-                        //      db.close();
                         sendOrder(out, res,db);
                     })
                 }
@@ -328,7 +298,7 @@ let sendOrder = function(out,res,sessionid,db,name,last,dir,city,provin,radio,te
 
 let deleteFromcart = function (db,cd) {
     let dbo = db.db("Maycin");
-    var myquery = { cedula: cd };
+    let myquery = { cedula: cd };
     dbo.collection("Carts").deleteOne(myquery, function(err, obj) {
         if (err) throw err;
         console.log("1 document deleted");
@@ -392,51 +362,11 @@ router.get("/orders/",function (req,res) {
                    let   Telefono= data.Telefono;
                    let id = data.id;
                    let out = data.Productos;
-                   console.log("JODERRRRRRRRRRRRRRRRRRRR");
-                   console.log("11"+1);
-                   console.log("11"-1);
                    sendprice(out,res,session,req.query.id,db,1,Nombre,Apellido,Direccion,Ciudad,Provincia,Telefono,id);
                })
            });
         });
     }
-
-    // let session = 0;
-    // let username = '';
-    // if(req.session.user !== undefined)
-    // {
-    //     session = 1;
-    //     username = req.session.user;
-    //     const plp = req.query.id;
-    //     mongodb.connect(url,function (err,db) {
-    //         let dbo = db.db("Maycin");
-    //         dbo.collection('Orders').find({
-    //             "Productos.cd": plp
-    //         }).toArray(function (err, result) {
-    //             console.log("RESULTTTTTTTTT"+result);
-    //             if(result.length > 0) {
-    //                 result.forEach(function (data) {
-    //                     let out = data.prods;
-    //                     console.log("de ordenes: "+out);
-    //                     sendprice(out, res, session, username, db);
-    //                 })
-    //             }
-    //             else
-    //             {
-    //                 console.log("AQUI?");
-    //                 res.render('shopcart',{
-    //                     car:null,
-    //                     session: session,
-    //                     cd : username,
-    //                     price: 0,
-    //                     items: 0
-    //
-    //                 });
-    //             }
-    //         });
-    //     })
-    // }
-
 });
 
 module.exports = router;

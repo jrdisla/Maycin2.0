@@ -5,7 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
+<!--    Favivcon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+<!-- --------------------------------------------------------------------- -->
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -83,20 +88,6 @@
                         Looks good!
                     </div>
                 </div>
-<!--                <div class="col-md-4 mb-3">-->
-<!--                    <label for="validationCustom01">Nombres</label>-->
-<!--                    <input type="text" name="first" class="form-control" id="validationCustom01" placeholder="Nombres" required>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Looks good!-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 mb-3">-->
-<!--                    <label for="validationCustom02">Apellidos</label>-->
-<!--                    <input type="text" name="last" class="form-control" id="validationCustom02" placeholder="Apellidos"  required>-->
-<!--                    <div class="valid-feedback">-->
-<!--                        Looks good!-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="col-md-4 mb-3">
                     <label for="validationCustom02">Tienda y/o Negocio</label>
                     <input type="text" name="tienda" class="form-control" id="validationCustom02" placeholder="Tienda y/o Negocio"  required>
@@ -106,41 +97,23 @@
                 </div>
             </div>
             <div class="form-row">
-<!--                <div class="col-md-6 mb-3">-->
-<!--                    <label for="validationCustom03">Ciudad</label>-->
-<!--                    <input type="text" name="city" class="form-control" id="validationCustom03" placeholder="Ciudad" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid city.-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 mb-3">-->
-<!--                    <label for="validationCustom04">Municipio</label>-->
-<!--                    <input type="text" name="muni" class="form-control" id="validationCustom04" placeholder="Municipio" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid state.-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 mb-3">-->
-<!--                    <label for="validationCustom05">Dirección</label>-->
-<!--                    <input type="text" name="addr" class="form-control" id="validationCustom05" placeholder="Dirección" required>-->
-<!--                    <div class="invalid-feedback">-->
-<!--                        Please provide a valid zip.-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
+            <label for="customRange3">Cantidad de Productos</label>
+            <p>
+
+            </p>
+            <input style="width: 35%;" type="range" class="custom-range" name="rangeInput" min="100" max="5000" step="1" onchange="updateTextInput(this.value);">
+            <p>
+
+            </p>
+            <input type="text" id="ex1" readonly value="">
             <div class="mb-3">
                 <label for="validationTextarea">Información Especial sobre el producto</label>
-                <textarea name="info" class="form-control is-invalid" id="validationTextarea" placeholder="Ejemplo: Agregar iconos de redes sociales. Utilizar cordones de color rojo..." required></textarea>
+                <textarea style="width: 35%;" name="info" class="form-control is-invalid" id="validationTextarea" placeholder="Ejemplo: Agregar iconos de redes sociales. Utilizar cordones de color rojo..." required></textarea>
                 <div class="invalid-feedback">
                     Por favor introduzca informaciones sobre el producto.
                 </div>
             </div>
-
-<!--            <div class="custom-control custom-checkbox mb-3">-->
-<!--                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>-->
-<!--                <label class="custom-control-label" for="customControlValidation1">Reviso todo lo necesario?</label>-->
-<!--                <div class="invalid-feedback">Debe Aceptar</div>-->
-<!--            </div>-->
 
             <div class="custom-control custom-radio">
                 <input type="radio" class="custom-control-input" id="customControlValidation2" value="1" name="radio" required>
@@ -148,7 +121,7 @@
             </div>
             <div class="custom-control custom-radio mb-3">
                 <input type="radio" class="custom-control-input" id="customControlValidation3" value="2" name="radio" required>
-                <label class="custom-control-label" for="customControlValidation3">Logo de 4 o mas colores</label>
+                <label class="custom-control-label" for="customControlValidation3">Logo de 3 o mas colores</label>
                 <div class="invalid-feedback">Debe seleccionar</div>
             </div>
             <div class="form-group">
@@ -246,6 +219,10 @@
 <script src="js/jquery.fancybox.min.js"></script>
 <script src="js/jquery.sticky.js"></script>
 <script src="js/main.js"></script>
-
+<script>
+    function updateTextInput(val) {
+        document.getElementById('ex1').value=val;
+    }
+</script>
 </body>
 </html>
